@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our 3 Months Together</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Montserrat:wght@400;600&display=swap');
+        
+        :root {
+            --pink: #ff6b98;
+            --red: #ff2e63;
+            --purple: #9e579d;
+            --dark: #393e46;
+            --light: #f7f7f7;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background: linear-gradient(to right, #f8e1e4, #f9d5e3);
+            color: var(--dark);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            overflow-x: hidden;
+            position: relative;
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 800px;
+            margin: 2rem auto;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+        
+        h1 {
+            font-family: 'Dancing Script', cursive;
+            font-size: 3rem;
+            color: var(--red);
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+            animation: fadeIn 2s ease-in-out;
+        }
+        
+        .subtitle {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            color: var(--purple);
+        }
+        
+        /* Heart animation */
+        .heart-container {
+            position: relative;
+            width: 100%;
+            height: 150px;
+            margin: 2rem 0;
+            overflow: hidden;
+        }
+        
+        .heart {
+            position: absolute;
+            width: 30px;
+            height: 30px;
+            background-color: var(--red);
+            transform: rotate(45deg);
+            animation: float 6s ease-in-out infinite;
+            opacity: 0.7;
+        }
+        
+        .heart:before,
+        .heart:after {
+            content: '';
+            width: 30px;
+            height: 30px;
+            background-color: var(--red);
+            border-radius: 50%;
+            position: absolute;
+        }
+        
+        .heart:before {
+            top: -15px;
+            left: 0;
+        }
+        
+        .heart:after {
+            top: 0;
+            left: -15px;
+        }
+        
+        .heart:nth-child(2) {
+            left: 20%;
+            animation-delay: 1s;
+            background-color: var(--pink);
+        }
+        
+        .heart:nth-child(2):before,
+        .heart:nth-child(2):after {
+            background-color: var(--pink);
+        }
+        
+        .heart:nth-child(3) {
+            left: 40%;
+            animation-delay: 2s;
+            width: 20px;
+            height: 20px;
+        }
+        
+        .heart:nth-child(3):before,
+        .heart:nth-child(3):after {
+            width: 20px;
+            height: 20px;
+        }
+        
+        .heart:nth-child(4) {
+            left: 60%;
+            animation-delay: 0.5s;
+            background-color: var(--purple);
+        }
+        
+        .heart:nth-child(4):before,
+        .heart:nth-child(4):after {
+            background-color: var(--purple);
+        }
+        
+        .heart:nth-child(5) {
+            left: 80%;
+            animation-delay: 1.5s;
+            width: 25px;
+            height: 25px;
+        }
+        
+        .heart:nth-child(5):before,
+        .heart:nth-child(5):after {
+            width: 25px;
+            height: 25px;
+        }
+        
+        /* Letter */
+        .letter {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            margin: 2rem 0;
+            position: relative;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.7s ease-in-out;
+        }
+        
+        .letter.open {
+            max-height: 1000px;
+        }
+        
+        .letter-content {
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out 0.3s;
+        }
+        
+        .letter.open .letter-content {
+            opacity: 1;
+        }
+        
+        .letter-btn {
+            background: linear-gradient(to right, var(--pink), var(--red));
+            color: white;
+            border: none;
+            padding: 0.8rem 1.5rem;
+            font-size: 1rem;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin: 1rem 0;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        
+        .letter-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+        }
+        
+        /* Question */
+        .question {
+            margin: 2rem 0;
+            padding: 1.5rem;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .question h3 {
+            color: var(--purple);
+            margin-bottom: 1rem;
+        }
+        
+        .options {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        
+        .option-btn {
+            padding: 0.5rem 1rem;
+            border: 2px solid var(--pink);
+            background: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .option-btn:hover {
+            background-color: var(--pink);
+            color: white;
+        }
+        
+        .response {
+            margin-top: 1rem;
+            font-weight: 600;
+            color: var(--red);
+            min-height: 24px;
+        }
+        
+        /* Animations */
+        @keyframes float {
+            0%, 100% {
+                transform: rotate(45deg) translateY(0);
+            }
+            50% {
+                transform: rotate(45deg) translateY(-20px);
+            }
+        }
+        
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        /* Decorative elements */
+        .circle {
+            position: absolute;
+            border-radius: 50%;
+            opacity: 0.3;
+            z-index: 0;
+        }
+        
+        .circle-1 {
+            width: 200px;
+            height: 200px;
+            background-color: var(--pink);
+            top: -50px;
+            left: -50px;
+        }
+        
+        .circle-2 {
+            width: 300px;
+            height: 300px;
+            background-color: var(--purple);
+            bottom: -100px;
+            right: -100px;
+        }
+        
+        footer {
+            margin-top: 2rem;
+            color: var(--purple);
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="circle circle-1"></div>
+    <div class="circle circle-2"></div>
+    
+    <div class="container">
+        <h1>Happy 3 Months Together!</h1>
+        <p class="subtitle">Every moment with you is a blessing ♡</p>
+        
+        <div class="heart-container">
+            <div class="heart"></div>
+            <div class="heart"></div>
+            <div class="heart"></div>
+            <div class="heart"></div>
+            <div class="heart"></div>
+        </div>
+        
+        <button class="letter-btn" id="letterBtn">Open My Letter to You</button>
+        
+        <div class="letter" id="letter">
+            <div class="letter-content">
+                <p>Dear Love,</p>
+                <p>Three months may not seem like a long time, but with you, every day feels special and meaningful. You've brought so much joy, laughter, and love into my life in these short months.</p>
+                <p>I cherish all our moments together, from the silly jokes only we understand to the quiet times when we're just enjoying each other's company. You make even ordinary days feel extraordinary.</p>
+                <p>Thank you for being you - your kindness, your smile, your wonderful heart. I'm excited for all the months and years to come, growing together and creating more beautiful memories.</p>
+                <p>With all my heart,<br>Your Love</p>
+            </div>
+        </div>
+        
+        <div class="question">
+            <h3>Will you continue this beautiful journey with me?</h3>
+            <div class="options">
+                <button class="option-btn" onclick="showResponse('ofcourse')">Of Course!</button>
+                <button class="option-btn" onclick="showResponse('always')">Always ♡</button>
+                <button class="option-btn" onclick="showResponse('forever')">Forever</button>
+            </div>
+            <div class="response" id="response"></div>
+        </div>
+    </div>
+    
+    <footer>Made with love for you ♡</footer>
+    
+    <script>
+        // Letter toggle
+        const letterBtn = document.getElementById('letterBtn');
+        const letter = document.getElementById('letter');
+        
+        letterBtn.addEventListener('click', () => {
+            letter.classList.toggle('open');
+            letterBtn.textContent = letter.classList.contains('open') ? 'Close Letter' : 'Open My Letter to You';
+        });
+        
+        // Question response
+        function showResponse(type) {
+            const response = document.getElementById('response');
+            const responses = {
+                ofcourse: "I knew you'd say that! Can't wait for many more months together ♡",
+                always: "My heart knew you'd choose this. I'll always choose you too.",
+                forever: "That's exactly what I hoped you'd say. Forever it is."
+            };
+            
+            response.textContent = responses[type];
+            
+            // Create a small heart animation
+            createFloatingHeart();
+        }
+        
+        // Create floating hearts
+        function createFloatingHeart() {
+            const colors = ['#ff6b98', '#ff2e63', '#9e579d'];
+            
+            for (let i = 0; i < 5; i++) {
+                const heart = document.createElement('div');
+                heart.classList.add('heart');
+                heart.style.left = `${Math.random() * 80 + 10}%`;
+                heart.style.top = '150px';
+                heart.style.width = `${Math.random() * 20 + 10}px`;
+                heart.style.height = heart.style.width;
+                heart.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                heart.style.opacity = Math.random() * 0.5 + 0.3;
+                heart.style.animation = `float ${Math.random() * 3 + 3}s ease-in-out infinite ${Math.random() * 2}s`;
+                
+                document.querySelector('.heart-container').appendChild(heart);
+                
+                setTimeout(() => {
+                    heart.remove();
+                }, 5000);
+            }
+        }
+        
+        // Auto-create floating hearts occasionally
+        setInterval(createFloatingHeart, 3000);
+    </script>
+</body>
+</html>
+
